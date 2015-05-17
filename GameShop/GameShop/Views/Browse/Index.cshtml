@@ -1,0 +1,28 @@
+﻿@using GameShop.Models
+@{
+    ViewBag.Title = "Index";
+}
+
+<table cellpadding="2" cellspacing="2" border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Release Date</th>
+        <th>Genre</th>
+        <th>Details</th>
+        <th>Price</th>
+        <th>Buy</th>
+    </tr>
+    @foreach (Game p in ViewBag.listProducts)
+    {
+        <tr>
+            <td>@p.ID</td>
+            <td>@p.Name</td>
+            <td>@p.ReleaseDate</td>
+            <td>@p.Genre</td>
+            <td>@p.Details</td>
+            <td>@p.Price</td>
+            <td align="center">@Html.ActionLink("Order now","OrderNow","ShoppingCart",new {id = p.ID},null)</td>
+        </tr>
+    }
+</table>

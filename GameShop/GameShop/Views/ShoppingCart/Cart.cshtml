@@ -1,0 +1,35 @@
+﻿@using GameShop.Controllers
+@{
+    ViewBag.Title = "Cart";
+    double total = 0.0;
+}
+
+<h2>Your shopping cart:</h2>
+<br/><br/>
+<table cellpadding="2" cellspacing="2" border="1">
+    <tr>
+        <th>Option</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Sub Total</th>
+    </tr>
+    @foreach (Item item in (List<Item>) Session["cart"])
+    {
+        <tr>
+            <td>@Html.ActionLink("Delete","Delete","ShoppingCart",new{ id = item.Pr.ID},null)</td>
+            <td>@item.Pr.ID</td>
+            <td>@item.Pr.Name</td>
+            <td>@item.Pr.Price</td>
+            <td>@item.Quantity</td>
+            <td>@(item.Pr.Price*item.Quantity)</td>
+            @{ total += (double) (item.Pr.Price*item.Quantity); }
+        </tr>
+    }
+</table>
+<br /><br />
+<h3>Total: @total</h3>
+<br/><br />
+@Html.ActionLink("Continue shopping","Index","Browse")
+
